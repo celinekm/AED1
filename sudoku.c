@@ -1,37 +1,50 @@
 #include <stdio.h>
 
-int verifica( int V[9][9], int l, int c, int numero){
-    for(int i=0; i<9; i++){
-        for(int j=0; j<9; j++){
-            if(V[l][j] == numero || V[i][c] == numero)
-            return 0;
+int verifica(int x, int V[9][9], int l, int c){
+    for (int i=0; i<9; i++){
+        for (int j=0; j<9; j++){
+            if (V[i][c] == x || V[l][j]== x)
+                return 0;
         }
     }
-    for(int i=(l/3)*3; i<3; i++){
-        for(int j=(c/3)*3; j<3: j++){
-            if(V[i][j]== numero)
-            return 0;
+    int blocolinha = (l/3)*3, blococoluna = (c/3)*3;
+    for (int i= blocolinha; i< blocolinha+3; i++){
+        for (int j=blococoluna; j<blococoluna+3; j++){
+            if (V[i][j]==x)
+                return 0;
         }
     }
     return 1;
 }
-
 int main(){
-    int M[9][9] ={0}, valido=0, instancia=0, numero;
-    scanf("%d", &instancia);
-    for(int i=0; i<instancia; i++){
-        for(int j=0; j<9; j++){
-            for( int k=0; k<9; k++){
-                scanf("%d", &numero);
-                if(!verifica(M,j,k,numero)){
-                    valido = 1;
+    int jogo=0, V[9][9]={0}, x, instancia,n=1;
+    scanf ("%d", &jogo);
+    while (jogo > 0){
+        for (int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+                scanf ("%d", &x);
+                if (verifica(x, V, i,j)){
+                    V[i][j] = x ;
+                }
+                else {
+                    instancia = 1;
                 }
             }
         }
-        if(valido == 1)
-            printf("instancia %d\nNAO", i+1);
-        if(valido == 0)
-            printf("instancia %d\nSIM", i+1)
+         printf("Instancia %d\n", n);
+        if(!instancia){
+            printf("SIM\n\n");
+        }
+        else{
+            printf("NAO\n\n");
+        }
+
+        instancia = 0;
+        jogo--;
+        n++;
+        for (int i=0; i<9; i++){
+            for (int j=0; j<9; j++){
+              V[i][j] = 0;
+            }
+        }
     }
-    
-}

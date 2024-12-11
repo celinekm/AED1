@@ -34,7 +34,7 @@ int main() {
             V[i] = rand() % 1000000;
         }
         clock_t comeco = clock();
-        mergeSort(V, 0, n - 1);
+        quickSort(V, 0, n - 1);
         clock_t fim = clock();
         double demorou = ((double)(fim - comeco)) / CLOCKS_PER_SEC;
         printf("N = %d, Tempo = %f segundos\n", n, demorou);

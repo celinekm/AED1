@@ -21,23 +21,19 @@ void insertionSort(int V[], int n) {
 
 
 int main() {
-    int V[MAX]; 
-
-    for (int n = 0; n <= MAX; n += 50000) {
-        
+    int V[MAX];
+    for (int k = 0; k<3; k++){
+        printf("repeticao %d \n\n", k+1);
+        for (int n = 0; n <= MAX; n += 20000) {
         for (int i = 0; i < n; i++) {
             V[i] = rand() % 1000000;
         }
-
-        
         clock_t comeco = clock();
-        insertionSort(V, n);
+        insertionSort(V, 0, n - 1);
         clock_t fim = clock();
-
         double demorou = ((double)(fim - comeco)) / CLOCKS_PER_SEC;
-
         printf("N = %d, Tempo = %f segundos\n", n, demorou);
+        }
     }
-
     return 0;
 }
